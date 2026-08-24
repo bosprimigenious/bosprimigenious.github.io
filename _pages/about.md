@@ -1,48 +1,84 @@
 ---
-layout: about
+layout: default
 title: about
 permalink: /
-subtitle: 北京邮电大学 · 全栈与前端
-
-profile:
-  align: right
-  image: prof_pic.jpg
-  image_circular: true
-  more_info: >
-    <p>北京邮电大学</p>
-    <p>海淀 · 西土城路</p>
-    <p>bosprimigenious@foxmail.com</p>
-
-selected_papers: false
-social: true
-announcements:
-  enabled: false
-latest_posts:
-  enabled: true
-  scrollable: false
-  limit: 3
+nav: true
+nav_order: 1
 ---
 
-你好，我是 **Bosprimigenious**（张恒基）。
+<section class="atelier-cover">
+  <p class="atelier-kicker">
+    <span id="atelier-greet">你好</span>
+    <span aria-hidden="true"> · </span>
+    <time id="atelier-clock"></time>
+  </p>
 
-北京邮电大学学生，做全栈与前端。这个站点用来放项目、笔记，以及之后的学术记录。
+  <h1 class="atelier-name">BosPrimigenious <em>Zhang</em></h1>
+  <p class="atelier-deck">北京邮电大学 · 全栈与前端</p>
 
-中文 · 余志存高远，欲以微力济世。
+  <p class="atelier-verb" aria-hidden="true">
+    <span class="atelier-verb-item">写界面</span>
+    <span class="atelier-verb-item">做系统</span>
+    <span class="atelier-verb-item">记过程</span>
+  </p>
 
-English · Building quietly, and trying to leave the work cleaner than I found it.
+  <div class="atelier-rule" aria-hidden="true"></div>
 
-### 技能
+  <div class="atelier-hero">
+    <div class="atelier-copy" data-reveal>
+      <p>你好，我是 <strong>Bosprimigenious</strong>（张恒基）。</p>
+      <p>这个站点用来放项目、笔记，以及之后的学术记录。来了就先看作品，再看我怎么想。</p>
+      <p class="atelier-en">Building quietly, and trying to leave the work cleaner than I found it.</p>
+      <p class="atelier-links">
+        <a href="/projects/">项目</a>
+        <a href="/blog/">笔记</a>
+        <a href="/contact/">联系</a>
+      </p>
+    </div>
+    <figure class="atelier-photo" data-reveal>
+      <img src="{{ '/assets/img/prof_pic.jpg' | relative_url }}" alt="Bosprimigenious Zhang" width="420" height="420">
+      <figcaption>海淀 · 西土城路</figcaption>
+    </figure>
+  </div>
+</section>
 
-- 前端 — React, Vue, TypeScript
-- 界面 — Figma
-- 工程 — Vite, Git, Docker
+<section class="atelier-grid" data-reveal>
+  <article>
+    <h2>技能</h2>
+    <ol>
+      <li>前端 — React, Vue, TypeScript</li>
+      <li>界面 — Figma</li>
+      <li>工程 — Vite, Git, Docker</li>
+    </ol>
+  </article>
+  <article>
+    <h2>协作</h2>
+    <ol>
+      <li><a href="https://github.com/Prince-Led-Initiatives">Prince-Led-Initiatives</a></li>
+      <li><a href="https://github.com/Nexus-Best">Nexus-Best</a></li>
+      <li><a href="https://github.com/TextGuard-BUPT">TextGuard-BUPT</a></li>
+      <li><a href="https://github.com/WebTravelLAB">WebTravelLAB</a></li>
+      <li><a href="https://github.com/SleepFamily">SleepFamily</a></li>
+    </ol>
+  </article>
+</section>
 
-### 协作
+<section class="atelier-notes" data-reveal>
+  <div class="atelier-notes-head">
+    <h2>最近笔记</h2>
+    <a href="/blog/">全部</a>
+  </div>
+  <ol class="atelier-index">
+    {% for post in site.posts limit: 4 %}
+    <li>
+      <a href="{{ post.url | relative_url }}">
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%m.%d" }}</time>
+        <span class="atelier-year">{{ post.date | date: "%Y" }}</span>
+        <h3>{{ post.title }}</h3>
+      </a>
+    </li>
+    {% endfor %}
+  </ol>
+</section>
 
-- [Prince-Led-Initiatives](https://github.com/Prince-Led-Initiatives) — 多智能体平台
-- [Nexus-Best](https://github.com/Nexus-Best)
-- [TextGuard-BUPT](https://github.com/TextGuard-BUPT)
-- [WebTravelLAB](https://github.com/WebTravelLAB)
-- [SleepFamily](https://github.com/SleepFamily)
-
-[项目](/projects/) · [笔记](/blog/) · [联系](/contact/)
+<script src="{{ '/assets/js/atelier.js' | relative_url }}" defer></script>
