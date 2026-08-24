@@ -513,7 +513,7 @@ third_party_libraries:
     version: "5.5.0"
   google_fonts:
     url:
-      fonts: "/assets/css/system-fonts.css"
+      fonts: "/assets/css/atelier-v2.css"
   highlightjs:
     integrity:
       css:
