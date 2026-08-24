@@ -1,0 +1,363 @@
+<!DOCTYPE html> <html lang="zh-CN"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> WenZhenGuardian 团队开发规范 | BosPrimigenious Zhang </title> <meta name="author" content="BosPrimigenious Zhang"> <meta name="description" content="Bosprimigenious — BUPT student, full-stack &amp; frontend developer. Projects, blog, and publications. "> <meta name="keywords" content="portfolio, full-stack, frontend, BUPT, bosprimigenious"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>:root{--max-content-width:930px}</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="/assets/img/favicon.png?v=95c5611ec4b8191be4db6af3661049f9"> <link rel="stylesheet" href="/assets/css/main.css?v=d41d8cd98f00b204e9800998ecf8427e"> <link rel="canonical" href="https://bosprimigenious.github.io/blog/guifan/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">BosPrimigenious</span> Zhang </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">projects </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/contact/">contact </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">WenZhenGuardian 团队开发规范</h1> <p class="post-meta"> Created on December 04, 2025 </p> <p class="post-tags"> <a href="/blog/2025"> <i class="fa-solid fa-calendar fa-sm"></i> 2025 </a>   ·   <a href="/blog/tag/team"> <i class="fa-solid fa-hashtag fa-sm"></i> team</a>   <a href="/blog/tag/workflow"> <i class="fa-solid fa-hashtag fa-sm"></i> workflow</a>   ·   <a href="/blog/category/notes"> <i class="fa-solid fa-tag fa-sm"></i> notes</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <p>WenZhenGuardian 团队开发规范 一、分支规范 ✔ 默认分支</p> <p>main：稳定版本，只存放已测试、可部署代码 ⚠ 禁止直接在 main 上开发</p> <p>✔ 开发分支</p> <p>每个成员开发功能必须新建功能分支：</p> <p>feature/&lt;功能名&gt; bugfix/&lt;修复内容&gt; hotfix/&lt;紧急修复&gt; refactor/&lt;重构内容&gt;重构内容&gt;紧急修复&gt;修复内容&gt;功能名&gt;</p> <p>示例：</p> <p>✔ 2. 加入 GitHub Actions</p> <h1 id="wenzhenguardian-团队开发规范">WenZhenGuardian 团队开发规范</h1> <hr> <h2 id="一分支规范">一、分支规范</h2> <ul> <li> <p><strong>默认分支</strong></p> <ul> <li> <code class="language-plaintext highlighter-rouge">main</code>：稳定版本，只存放已测试、可部署代码</li> <li>⚠️ 禁止直接在 <code class="language-plaintext highlighter-rouge">main</code> 上开发</li> </ul> </li> <li> <p><strong>开发分支（每个成员必须新建）</strong></p> <ul> <li><code class="language-plaintext highlighter-rouge">feature/&lt;功能名&gt;</code></li> <li><code class="language-plaintext highlighter-rouge">bugfix/&lt;修复内容&gt;</code></li> <li><code class="language-plaintext highlighter-rouge">hotfix/&lt;紧急修复&gt;</code></li> <li> <code class="language-plaintext highlighter-rouge">refactor/&lt;重构内容&gt;</code> <h1 id="wenzhenguardian-团队开发规范详尽版">WenZhenGuardian 团队开发规范（详尽版）</h1> </li> </ul> </li> </ul> <blockquote> <p>目的：统一团队协作流程，减少合并冲突，提高代码质量与交付效率。优先保证 <code class="language-plaintext highlighter-rouge">main</code> 分支始终可部署。</p> </blockquote> <hr> <h2 id="一分支规范详尽bushi不详尽">一、分支规范（详尽）（bushi）（不详尽）</h2> <p>总体原则：</p> <ul> <li>保持 <code class="language-plaintext highlighter-rouge">main</code>（或 <code class="language-plaintext highlighter-rouge">release</code>）为稳定、可部署分支；所有开发活动在临时分支完成并通过 PR 合并。</li> <li>分支命名应可读、可追溯、短小且语义化，便于审查和 CI 跟踪。</li> <li>说人话就是，大家千万不要懂main分支</li> <li>然后可以看看如何创建新分支，每个人有自己的分支</li> </ul> <p>推荐分支类型与用途：</p> <ul> <li> <code class="language-plaintext highlighter-rouge">main</code>：生产/部署分支，仅可通过合并 PR 更新（受分支保护策略管控）。</li> <li> <code class="language-plaintext highlighter-rouge">develop</code>（可选）：汇总短期开发成果的集成分支；团队较大或需要持续集成时建议使用。若使用此分支，Feature 分支应合并到 <code class="language-plaintext highlighter-rouge">develop</code>，release 从 <code class="language-plaintext highlighter-rouge">develop</code> 发出并合并回 <code class="language-plaintext highlighter-rouge">main</code> 与 <code class="language-plaintext highlighter-rouge">develop</code>。</li> <li> <code class="language-plaintext highlighter-rouge">feature/&lt;短描述&gt;</code>：新功能分支，仅包含一个明确的功能点或任务（如 <code class="language-plaintext highlighter-rouge">feature/login-oauth</code>）。</li> <li> <code class="language-plaintext highlighter-rouge">bugfix/&lt;短描述&gt;</code>：用于修复开发中发现但不紧急的问题（合并到 <code class="language-plaintext highlighter-rouge">develop</code> 或 <code class="language-plaintext highlighter-rouge">main</code> 视流程而定）。</li> <li> <code class="language-plaintext highlighter-rouge">hotfix/&lt;短描述&gt;</code>：用于线上紧急问题，直接从 <code class="language-plaintext highlighter-rouge">main</code> 创建，修复后需合并回 <code class="language-plaintext highlighter-rouge">main</code> 和 <code class="language-plaintext highlighter-rouge">develop</code>（若存在）。</li> <li> <code class="language-plaintext highlighter-rouge">release/&lt;x.y.z&gt;</code>（可选）：准备发布的分支，用于最后的集成测试与版本号调整，测试通过后合并回 <code class="language-plaintext highlighter-rouge">main</code> 并打 tag。</li> <li> <code class="language-plaintext highlighter-rouge">refactor/&lt;短描述&gt;</code>：仅用于重构，要求在 PR 中说明不改变外部行为。</li> </ul> <p>分支命名规范（示例）：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>feature/auth-jwt
+bugfix/login-redirect
+hotfix/critical-500
+refactor/api-client
+release/1.2.0
+</code></pre></div></div> <p>常见操作命令（示例）：</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 从远程更新本地 main</span>
+git checkout main
+git pull origin main
+
+<span class="c"># 创建 feature 分支</span>
+git checkout <span class="nt">-b</span> feature/auth-jwt
+
+<span class="c"># 在分支上工作、提交、推送</span>
+git add <span class="nb">.</span>
+git commit <span class="nt">-m</span> <span class="s2">"feat(auth): add JWT login"</span>
+git push <span class="nt">-u</span> origin feature/auth-jwt
+</code></pre></div></div> <p>PR 与合并策略：</p> <p><strong>合并到main分支必须经过bosprimigenious审核</strong></p> <ul> <li>所有分支合并到 <code class="language-plaintext highlighter-rouge">main</code>（或 <code class="language-plaintext highlighter-rouge">develop</code>）必须通过 Pull Request。PR 要求至少一个代码评审者通过（人数可在分支保护中设置）。</li> <li>CI 必须通过（lint/format/tests）才能合并。</li> <li>合并方式建议： <ul> <li>对于保留历史：使用 <code class="language-plaintext highlighter-rouge">Merge commit</code>（默认），有利于保留上下文；</li> <li>对于整洁历史：可使用 <code class="language-plaintext highlighter-rouge">Squash and merge</code>，把多次提交合并为一次有意义提交；</li> <li>不建议在公共分支上强制 <code class="language-plaintext highlighter-rouge">rebase</code>，以避免复杂的历史重写风险。</li> </ul> </li> </ul> <p>冲突处理（简单流程）：</p> <ol> <li>拉取远端最新目标分支：<code class="language-plaintext highlighter-rouge">git fetch origin</code>，切换目标分支并 <code class="language-plaintext highlighter-rouge">git pull</code>。</li> <li>在自己的分支执行 <code class="language-plaintext highlighter-rouge">git merge origin/main</code>（或 <code class="language-plaintext highlighter-rouge">origin/develop</code>），解决冲突并 <code class="language-plaintext highlighter-rouge">git add</code> 冲突文件。</li> <li> <code class="language-plaintext highlighter-rouge">git commit</code>（必要时），再 <code class="language-plaintext highlighter-rouge">git push</code> 到远程分支，PR 会自动更新。</li> </ol> <p>示例：从 <code class="language-plaintext highlighter-rouge">main</code> 合并到 feature 并解决冲突：</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout feature/auth-jwt
+git fetch origin
+git merge origin/main
+<span class="c"># 解决冲突后</span>
+git add conflicted_file.py
+git commit <span class="nt">-m</span> <span class="s2">"fix: resolve merge conflicts with main"</span>
+git push
+</code></pre></div></div> <p>分支生命周期建议：</p> <ul> <li>Feature 分支：短生命周期（建议不超过 2 周），长时间分支增加冲突风险。</li> <li>Hotfix：创建后尽快修复并合并回 <code class="language-plaintext highlighter-rouge">main</code> 与 <code class="language-plaintext highlighter-rouge">develop</code>，打上补丁版本号。</li> <li>Release：用于最终集成测试，不应在 release 分支上新增新功能。</li> </ul> <p>权限与分支保护（建议在 GitHub 上配置）：</p> <ul> <li>对 <code class="language-plaintext highlighter-rouge">main</code> 启用 Branch protection： <ul> <li>勾选：Require pull request before merging</li> <li>勾选：Require status checks to pass before merging（选中 CI 检查）</li> <li>勾选：Require approvals（最少 1 或 2 位审查者）</li> <li>可选：Restrict who can push to matching branches（仅允许管理员或 CI 推送）</li> </ul> </li> </ul> <hr> <h2 id="二提交信息git-commit规范简洁但强制">二、提交信息（Git Commit）规范（简洁但强制）</h2> <p>规则：</p> <ul> <li>格式：<code class="language-plaintext highlighter-rouge">&lt;type&gt;(&lt;scope&gt;): &lt;short summary&gt;</code>，例如：<code class="language-plaintext highlighter-rouge">feat(auth): add JWT login</code> </li> <li>常用 type：<code class="language-plaintext highlighter-rouge">feat</code>、<code class="language-plaintext highlighter-rouge">fix</code>、<code class="language-plaintext highlighter-rouge">docs</code>、<code class="language-plaintext highlighter-rouge">style</code>、<code class="language-plaintext highlighter-rouge">refactor</code>、<code class="language-plaintext highlighter-rouge">test</code>、<code class="language-plaintext highlighter-rouge">chore</code> </li> <li>每个提交的 summary 不超过 72 个字符；需要详细描述时在 body 中说明。示例：</li> </ul> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>feat(auth): add JWT login
+
+- 支持 access/refresh token
+- 增加 token 刷新路由
+</code></pre></div></div> <p>Git 提交示例命令：</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add changed_file.py
+git commit <span class="nt">-m</span> <span class="s2">"feat(api): add inference endpoint"</span>
+</code></pre></div></div> <hr> <h2 id="三pull-requestpr模板与评审要点">三、Pull Request（PR）模板与评审要点</h2> <p>在仓库中添加 <code class="language-plaintext highlighter-rouge">.github/PULL_REQUEST_TEMPLATE.md</code> 可强制 PR 填写必要信息。建议内容：</p> <ul> <li> <strong>概述</strong>：做了什么？</li> <li> <strong>变更类型</strong>：<code class="language-plaintext highlighter-rouge">feat</code>/<code class="language-plaintext highlighter-rouge">fix</code>/<code class="language-plaintext highlighter-rouge">docs</code>/<code class="language-plaintext highlighter-rouge">chore</code> 等</li> <li> <strong>为何需要</strong>：问题背景或需求来源</li> <li> <strong>如何测试</strong>：复现步骤、测试用例或截图</li> <li> <strong>关联 issue</strong>：若有关联 issue 请列出</li> </ul> <p>评审要点清单：</p> <ul> <li>功能实现是否完整（边界/错误处理）</li> <li>测试覆盖是否充足（unit/integration）</li> <li>代码是否风格一致并通过 lint</li> <li>是否存在性能/安全隐患</li> <li>文档/注释是否更新</li> </ul> <hr> <h2 id="四ci-与自动化建议概要这个我自己也没懂其实还在学习">四、CI 与自动化建议（概要）这个我自己也没懂，其实，还在学习</h2> <p>建议在 <code class="language-plaintext highlighter-rouge">main</code>/<code class="language-plaintext highlighter-rouge">develop</code> 的 PR 检查中加入以下 CI：</p> <ul> <li>代码风格：<code class="language-plaintext highlighter-rouge">black</code>（Python）、<code class="language-plaintext highlighter-rouge">Prettier</code>（JS）</li> <li>静态检查：<code class="language-plaintext highlighter-rouge">flake8</code>（Python）、<code class="language-plaintext highlighter-rouge">ESLint</code>（JS）</li> <li>测试：单元测试、关键集成测试</li> <li>构建或类型检查：<code class="language-plaintext highlighter-rouge">mypy</code>（可选）、<code class="language-plaintext highlighter-rouge">tsc</code>（如使用 TS）</li> </ul> <p>可用动作：<code class="language-plaintext highlighter-rouge">.github/workflows/ci.yml</code> 配置自动在每个 PR 运行上述检查并把结果作为合并前必须通过的状态检查。</p> <hr> <h2 id="五分支与版本管理实战示例完整流程">五、分支与版本管理实战示例（完整流程）</h2> <p>场景：你完成了登录功能，需要把它合并到主线并发布到测试环境。</p> <p>流程：</p> <ol> <li>本地创建 feature 分支并开发：</li> </ol> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout <span class="nt">-b</span> feature/login-oauth
+<span class="c"># 开发、提交多次</span>
+git push <span class="nt">-u</span> origin feature/login-oauth
+</code></pre></div></div> <ol> <li> <p>打开 GitHub 创建 PR（目标分支 <code class="language-plaintext highlighter-rouge">develop</code> 或 <code class="language-plaintext highlighter-rouge">main</code>），填写 PR 模板。</p> </li> <li> <p>CI 运行，审查者 review 并提出修改意见 → 按照建议修复并 push。</p> </li> <li> <p>CI 全部通过并获得审批，合并方式选择 <code class="language-plaintext highlighter-rouge">Squash and merge</code>（使历史清晰）。</p> </li> <li> <p>若合并到 <code class="language-plaintext highlighter-rouge">main</code>，在合并后打 tag 发布：</p> </li> </ol> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout main
+git pull origin main
+git tag <span class="nt">-a</span> v1.2.0 <span class="nt">-m</span> <span class="s2">"Release v1.2.0"</span>
+git push origin v1.2.0
+</code></pre></div></div> <ol> <li>若使用 <code class="language-plaintext highlighter-rouge">develop</code>，请确保把变更合并回 <code class="language-plaintext highlighter-rouge">main</code>（并发 release 流程）。</li> </ol> <hr> <h2 id="六最佳实践与常见问题">六、最佳实践与常见问题</h2> <ul> <li>保持分支短小，频繁与主线同步，减少冲突成本。</li> <li>每次 PR 聚焦单一目的（Bug 修复、一个 feature、重构），避免“大而全”的 PR。</li> <li>对二进制/大文件使用 Git LFS 或将其置于模型仓库/对象存储，不要直接放到 Git 仓库中。</li> <li>对数据与模型（&gt;100MB）使用外部存储，并在仓库中提供下载脚本或配置说明。</li> </ul> <p>常见问题：</p> <ul> <li>Q：合并冲突太多怎么办？ <ul> <li>A：把主线改动拉到本地分支（<code class="language-plaintext highlighter-rouge">git merge origin/main</code>），按文件逐一解决，鼓励小步提交与更频繁的合并。</li> </ul> </li> <li>Q：谁可以合并 PR？ <ul> <li>A：通过分支保护设置（Require approvals）来限制，通常要求至少一位有写权限的 reviewer 批准。</li> </ul> </li> </ul> <hr> <h2 id="七附常用-git-命令速查表">七、附：常用 Git 命令速查表</h2> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 克隆
+git clone &lt;repo&gt;
+
+# 查看远程
+git remote -v
+
+# 创建并切换分支
+git checkout -b feature/xxx
+
+# 提交
+git add .
+git commit -m "feat: ..."
+
+# 推送分支
+git push -u origin feature/xxx
+
+# 合并远端 main 到当前分支
+git fetch origin
+git merge origin/main
+
+# 删除远端分支
+git push origin --delete feature/old
+</code></pre></div></div> <ul> <li>剩下的看看git使用指南+配套大模型问问得了，够用了。</li> </ul> <hr> </div> </article> <br> <hr> <br> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <ul class="list-disc pl-7 my-3 space-y-2 marker:text-[var(--global-theme-color)]"> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/markdown/">MarkDown 介绍</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/Detail_MC_game/">Minecraft 服务器配置</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/npm/">Npm 使用指南</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/git/">Git 使用指南</a> </li> </ul> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 BosPrimigenious Zhang. © Bosprimigenious · Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> &amp; <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a>. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-publications",
+          title: "publications",
+          description: "论文与学术成果（在 _bibliography/papers.bib 中维护）",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "开源与课程项目（GitHub 公开仓库）",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-contact",
+          title: "contact",
+          description: "联系我",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/contact/";
+          },
+        },{id: "post-wenzhenguardian-团队开发规范",
+        
+          title: "WenZhenGuardian 团队开发规范",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/guifan/";
+          
+        },
+      },{id: "post-markdown-介绍",
+        
+          title: "MarkDown 介绍",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/markdown/";
+          
+        },
+      },{id: "post-minecraft-服务器配置",
+        
+          title: "Minecraft 服务器配置",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/Detail_MC_game/";
+          
+        },
+      },{id: "post-npm-使用指南",
+        
+          title: "Npm 使用指南",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/npm/";
+          
+        },
+      },{id: "post-git-使用指南",
+        
+          title: "Git 使用指南",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/git/";
+          
+        },
+      },{id: "books-the-godfather",
+          title: 'The Godfather',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/books/the_godfather/";
+            },},{id: "projects-my-web-legacy",
+          title: 'my_web (legacy)',
+          description: "本站前身 — React + Vite + TypeScript 个人站，已迁移至 al-folio。",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/00-my-web-legacy/";
+            },},{id: "projects-au-admin-dashboard",
+          title: 'au-admin-dashboard',
+          description: "A modern, production-ready admin dashboard for agentUniverse. Built with Vue 3, Tailwind CSS v4, ECharts, and AntV G6 for multi-agent observability and resource management.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/01-au-admin-dashboard/";
+            },},{id: "projects-agentuniverse",
+          title: 'agentUniverse',
+          description: "agentUniverse is a LLM multi-agent framework that allows developers to easily build multi-agent applications.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/02-agentuniverse/";
+            },},{id: "projects-nexus",
+          title: 'Nexus',
+          description: "Open-source project maintained on GitHub.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/03-nexus/";
+            },},{id: "projects-studyqr",
+          title: 'StudyQR',
+          description: "在线上传二维码图片，解析并修改二维码内容的前端应用。",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/04-studyqr/";
+            },},{id: "projects-modelingpaperkit",
+          title: 'ModelingPaperKit',
+          description: "A zero-config, reproducible engineering kit for CUMCM &amp; MCM/ICM papers.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/05-modelingpaperkit/";
+            },},{id: "projects-unveil",
+          title: 'Unveil',
+          description: "Open-source project maintained on GitHub.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/06-unveil/";
+            },},{id: "projects-bupt-uwe",
+          title: 'BUPT_UWE',
+          description: "北邮 UWE 选课平台前端，Markdown 文档与深浅色主题。",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/07-bupt-uwe/";
+            },},{id: "projects-bupt-uwe-backend",
+          title: 'BUPT-UWE-BACKEND',
+          description: "北邮 UWE 选课平台后端 API。",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/08-bupt-uwe-backend/";
+            },},{id: "projects-personascope",
+          title: 'PersonaScope',
+          description: "Open-source project maintained on GitHub.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/12-personascope/";
+            },},{id: "projects-breast-cancer-early-screening-system",
+          title: 'Breast_Cancer_Early_Screening_System',
+          description: "Open-source project maintained on GitHub.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/13-breast-cancer-early-screening-system/";
+            },},{id: "projects-byrteam-vue-copy",
+          title: 'byrteam_vue_copy',
+          description: "Open-source project maintained on GitHub.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/14-byrteam-vue-copy/";
+            },},{id: "projects-vueshop-test",
+          title: 'vueshop_test',
+          description: "测试用 Vue 构建的前端商城能力。",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/15-vueshop-test/";
+            },},{id: "projects-notification-assistant",
+          title: 'Notification.Assistant',
+          description: "为大学生提供一站式信息获取平台。",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/16-notification-assistant/";
+            },},{id: "projects-stat-inegrity-checker",
+          title: 'Stat_Inegrity_Checker',
+          description: "Open-source project maintained on GitHub.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/20-stat-inegrity-checker/";
+            },},{id: "projects-kaiyuanzhixia",
+          title: 'Kaiyuanzhixia',
+          description: "Open-source project maintained on GitHub.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/21-kaiyuanzhixia/";
+            },},{id: "projects-typst-matrix",
+          title: 'Typst-Matrix',
+          description: "The ultimate All-in-One Typst workspace. Separate data from views with TOML, automate your PDF builds via GitHub Actions, and craft perfect bilingual resumes, academic reports, and slides without touc",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/22-typst-matrix/";
+            },},{id: "projects-dns-relay-server",
+          title: 'DNS-Relay-Server',
+          description: "A high-performance parallel DNS Relay Server implemented in C using Socket programming for BUPT Computer Network Course Design.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/30-dns-relay-server/";
+            },},{id: "projects-datalink-layer-lab",
+          title: 'DataLink-Layer-Lab',
+          description: "Design and implementation of a Data Link Layer Sliding Window Protocol. Simulates error-free, full-duplex communication between two stations over a noisy 8000bps satellite channel.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/31-datalink-layer-lab/";
+            },},{id: "projects-nfa-to-dfa",
+          title: 'NFA-to-DFA',
+          description: "Implementation of the Subset Construction algorithm to convert Non-deterministic Finite Automata (NFA) to Deterministic Finite Automata (DFA).",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/32-nfa-to-dfa/";
+            },},{id: "projects-smart-car-raspberry-pi",
+          title: 'smart_car_raspberry_pi',
+          description: "smart_car_raspberry_pi",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/33-smart-car-raspberry-pi/";
+            },},{id: "projects-big-data-applications",
+          title: 'Big_data_applications',
+          description: "My study experiences of big data appliction",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/34-big-data-applications/";
+            },},{id: "projects-my-cuda-expriences",
+          title: 'My_Cuda_Expriences',
+          description: "Learning CUDA programming with basic examples.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/35-my-cuda-expriences/";
+            },},{id: "projects-bos-css-lib",
+          title: 'bos_css_lib',
+          description: "A lightweight and customizable CSS component library for building modern web interfaces.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/40-bos-css-lib/";
+            },},{id: "projects-allright-codeclub",
+          title: 'Allright_CodeClub',
+          description: "组织代码俱乐部活动的项目。",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/41-allright-codeclub/";
+            },},{id: "projects-bosprimigenious",
+          title: 'bosprimigenious',
+          description: "my description.md",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/50-bosprimigenious/";
+            },},{id: "projects-github-readme-stats",
+          title: 'github-readme-stats',
+          description: "Dynamically generated stats for your GitHub readmes",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/60-github-readme-stats/";
+            },},{id: "projects-notification-assistant",
+          title: 'Notification_Assistant',
+          description: "We are committed to providing one-stop information acquisition services for college students, covering academic, life, entertainment and other aspects. The platform makes personalized recommendations",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/90-notification-assistant/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%62%6F%73%70%72%69%6D%69%67%65%6E%69%6F%75%73@%66%6F%78%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/bosprimigenious", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/bosprimigenious", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>
