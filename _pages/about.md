@@ -6,79 +6,94 @@ nav: true
 nav_order: 1
 ---
 
-<section class="atelier-cover">
-  <p class="atelier-kicker">
-    <span id="atelier-greet">你好</span>
-    <span aria-hidden="true"> · </span>
-    <time id="atelier-clock"></time>
-  </p>
+<div class="vibe">
+  <div class="vibe-spot" aria-hidden="true"></div>
 
-  <h1 class="atelier-name">BosPrimigenious <em>Zhang</em></h1>
-  <p class="atelier-deck">北京邮电大学 · 全栈与前端</p>
-
-  <p class="atelier-verb" aria-hidden="true">
-    <span class="atelier-verb-item">写界面</span>
-    <span class="atelier-verb-item">做系统</span>
-    <span class="atelier-verb-item">记过程</span>
-  </p>
-
-  <div class="atelier-rule" aria-hidden="true"></div>
-
-  <div class="atelier-hero">
-    <div class="atelier-copy" data-reveal>
-      <p>你好，我是 <strong>Bosprimigenious</strong>（张恒基）。</p>
-      <p>这个站点用来放项目、笔记，以及之后的学术记录。来了就先看作品，再看我怎么想。</p>
-      <p class="atelier-en">Building quietly, and trying to leave the work cleaner than I found it.</p>
-      <p class="atelier-links">
-        <a href="/projects/">项目</a>
-        <a href="/blog/">笔记</a>
-        <a href="/contact/">联系</a>
-      </p>
+  <header class="vibe-hero">
+    <p class="vibe-meta">
+      <span class="vibe-pill">在读 · BUPT</span>
+      <span id="atelier-greet">你好</span>
+      <time id="atelier-clock"></time>
+    </p>
+    <h1 class="vibe-name">张恒基</h1>
+    <p class="vibe-aka">BosPrimigenious Zhang</p>
+    <p class="vibe-lead">全栈与前端。把简历挂在这里，作品和过程也放在旁边。</p>
+    <div class="vibe-cta">
+      <a class="vibe-btn" href="mailto:bosprimigenious@foxmail.com">发邮件</a>
+      <a class="vibe-btn vibe-btn-ghost" href="https://github.com/bosprimigenious">GitHub</a>
+      <a class="vibe-btn vibe-btn-ghost" href="/projects/">项目</a>
     </div>
-    <figure class="atelier-photo" data-reveal>
-      <img src="{{ '/assets/img/prof_pic.jpg' | relative_url }}" alt="Bosprimigenious Zhang" width="420" height="420">
-      <figcaption>海淀 · 西土城路</figcaption>
+  </header>
+
+  <div class="vibe-marquee" aria-hidden="true">
+    <div class="vibe-marquee-track">
+      <span>React</span><span>Vue</span><span>TypeScript</span><span>Figma</span><span>Vite</span><span>Docker</span><span>Git</span>
+      <span>React</span><span>Vue</span><span>TypeScript</span><span>Figma</span><span>Vite</span><span>Docker</span><span>Git</span>
+    </div>
+  </div>
+
+  <section class="vibe-bento">
+    <article class="vibe-card vibe-about" data-reveal>
+      <p class="vibe-kicker">About</p>
+      <p>北京邮电大学学生。做界面，也做系统。想把东西做干净，再交给别人。</p>
+      <p class="vibe-en">Building quietly. Leave the work cleaner than I found it.</p>
+    </article>
+    <figure class="vibe-card vibe-photo" data-reveal>
+      <img src="{{ '/assets/img/prof_pic.jpg' | relative_url }}" alt="张恒基" width="480" height="600">
     </figure>
-  </div>
-</section>
+    <article class="vibe-card vibe-now" data-reveal>
+      <p class="vibe-kicker">Now</p>
+      <p>海淀 · 西土城路</p>
+      <p>多智能体、前端工程、课程与开源</p>
+    </article>
+  </section>
 
-<section class="atelier-grid" data-reveal>
-  <article>
-    <h2>技能</h2>
-    <ol>
-      <li>前端 — React, Vue, TypeScript</li>
-      <li>界面 — Figma</li>
-      <li>工程 — Vite, Git, Docker</li>
+  <section class="vibe-section" data-reveal>
+    <h2>履历</h2>
+    <ol class="vibe-timeline">
+      <li>
+        <span>2023 —</span>
+        <div>
+          <h3>北京邮电大学</h3>
+          <p>本科在读 · 全栈与前端</p>
+        </div>
+      </li>
+      <li>
+        <span>Now</span>
+        <div>
+          <h3>Prince-Led-Initiatives</h3>
+          <p>全栈多智能体平台 · 协作开发</p>
+        </div>
+      </li>
+      <li>
+        <span>Now</span>
+        <div>
+          <h3>TextGuard-BUPT</h3>
+          <p>文诊 / 多场景文本检测</p>
+        </div>
+      </li>
     </ol>
-  </article>
-  <article>
-    <h2>协作</h2>
-    <ol>
-      <li><a href="https://github.com/Prince-Led-Initiatives">Prince-Led-Initiatives</a></li>
-      <li><a href="https://github.com/Nexus-Best">Nexus-Best</a></li>
-      <li><a href="https://github.com/TextGuard-BUPT">TextGuard-BUPT</a></li>
-      <li><a href="https://github.com/WebTravelLAB">WebTravelLAB</a></li>
-      <li><a href="https://github.com/SleepFamily">SleepFamily</a></li>
-    </ol>
-  </article>
-</section>
+  </section>
 
-<section class="atelier-notes" data-reveal>
-  <div class="atelier-notes-head">
-    <h2>最近笔记</h2>
-    <a href="/blog/">全部</a>
-  </div>
-  <ol class="atelier-index">
-    {% for post in site.posts limit: 4 %}
-    <li>
-      <a href="{{ post.url | relative_url }}">
-        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%m.%d" }}</time>
-        <span class="atelier-year">{{ post.date | date: "%Y" }}</span>
-        <h3>{{ post.title }}</h3>
-      </a>
-    </li>
-    {% endfor %}
-  </ol>
-</section>
+  <section class="vibe-section" data-reveal>
+    <h2>精选</h2>
+    <div class="vibe-work">
+      <a href="https://github.com/Prince-Led-Initiatives">Prince-Led <em>多智能体</em></a>
+      <a href="https://github.com/bosprimigenious/Nexus">Nexus <em>前后端</em></a>
+      <a href="https://github.com/TextGuard-BUPT">TextGuard <em>检测</em></a>
+      <a href="https://github.com/bosprimigenious/StudyQR">StudyQR <em>工具</em></a>
+      <a href="/projects/">全部项目 →</a>
+    </div>
+  </section>
+
+  <section class="vibe-section vibe-contact" data-reveal>
+    <h2>联系</h2>
+    <p>
+      <a href="mailto:bosprimigenious@foxmail.com">bosprimigenious@foxmail.com</a><br>
+      <a href="https://github.com/bosprimigenious">github.com/bosprimigenious</a><br>
+      <a href="https://www.linkedin.com/in/bosprimigenious">linkedin.com/in/bosprimigenious</a>
+    </p>
+  </section>
+</div>
 
 <script src="{{ '/assets/js/atelier.js' | relative_url }}" defer></script>

@@ -2,7 +2,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const cssDir = path.join("_site", "assets", "css");
-const skipPurge = new Set(["main.css", "system-fonts.css", "atelier-v2.css", "atelier-v3.css"]);
+const skipPurge = new Set(["main.css", "system-fonts.css", "atelier-v2.css", "atelier-v3.css", "atelier-v4.css"]);
 const css = fs.existsSync(cssDir)
   ? fs
       .readdirSync(cssDir)
