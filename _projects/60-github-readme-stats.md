@@ -1,7 +1,7 @@
 ---
 layout: page
 title: github-readme-stats
-description: :zap: Dynamically generated stats for your github readmes
+description: "Dynamically generated stats for your GitHub readmes"
 importance: 60
 category: fork
 ---
