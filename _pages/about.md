@@ -2,7 +2,7 @@
 layout: default
 title: about
 permalink: /
-nav: true
+nav: false
 nav_order: 1
 ---
 
