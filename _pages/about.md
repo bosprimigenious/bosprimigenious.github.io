@@ -79,8 +79,9 @@ nav_order: 1
     <h2>精选</h2>
     <div class="vibe-work">
       <a href="https://github.com/Prince-Led-Initiatives">Prince-Led <em>多智能体</em></a>
-      <a href="https://github.com/bosprimigenious/Nexus">Nexus <em>前后端</em></a>
-      <a href="https://github.com/TextGuard-BUPT">TextGuard <em>检测</em></a>
+      <a href="https://github.com/bosprimigenious/ModelingPaperKit">ModelingPaperKit <em>数模</em></a>
+      <a href="https://github.com/bosprimigenious/agentic-rubric-runner">Rubric Runner <em>评分</em></a>
+      <a href="https://github.com/bosprimigenious/Unveil">Unveil <em>揭棋</em></a>
       <a href="https://github.com/bosprimigenious/StudyQR">StudyQR <em>工具</em></a>
       <a href="/projects/">全部项目 →</a>
     </div>

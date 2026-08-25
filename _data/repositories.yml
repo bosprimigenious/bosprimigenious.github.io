@@ -1,14 +1,14 @@
 github_users:
-  - torvalds
-  - alshedivat
+  - bosprimigenious
 
 repo_description_lines_max: 2
 
 github_repos:
-  - alshedivat/al-folio
-  - jekyll/jekyll
-  - twbs/bootstrap
-  - jquery/jquery
-  - FortAwesome/Font-Awesome
-  - mathjax/MathJax
-  - jpswalsh/academicons
+  - bosprimigenious/ModelingPaperKit
+  - bosprimigenious/agentic-rubric-runner
+  - bosprimigenious/Unveil
+  - bosprimigenious/LoopPilot
+  - bosprimigenious/StudyQR
+  - bosprimigenious/Stat_Inegrity_Checker
+  - bosprimigenious/au-admin-dashboard
+  - bosprimigenious/Typst-Matrix
