@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: project
 title: "Allright_CodeClub"
 description: "代码俱乐部活动仓库。"
 importance: 31

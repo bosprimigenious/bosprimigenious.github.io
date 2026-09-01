@@ -1,0 +1,44 @@
+---
+layout: default
+---
+<div class="fx">
+  <article class="fx-note">
+    <header class="note-head">
+      <p class="fx-kicker">
+        <a href="{{ '/blog/' | relative_url }}">Notes</a>
+        · {{ page.date | date: "%Y.%m.%d" }}
+      </p>
+      <h1>{{ page.title }}</h1>
+      {% if page.description %}
+      <p class="note-deck">{{ page.description }}</p>
+      {% endif %}
+      <p class="note-meta">
+        {{ page.content | number_of_words | divided_by: 180 | plus: 1 }} min
+        {% if page.tags %}
+          · {{ page.tags | join: " · " }}
+        {% endif %}
+      </p>
+    </header>
+
+    <div class="note-body">
+      {{ content }}
+    </div>
+
+    <footer class="note-foot">
+      <a href="{{ '/blog/' | relative_url }}">← 笔记</a>
+      {% assign more = site.posts | where_exp: "p", "p.url != page.url" %}
+      {% if more.size > 0 %}
+      <ol class="note-more">
+        {% for post in more limit: 3 %}
+        <li>
+          <a href="{{ post.url | relative_url }}">
+            <time>{{ post.date | date: "%m.%d" }}</time>
+            <span>{{ post.title }}</span>
+          </a>
+        </li>
+        {% endfor %}
+      </ol>
+      {% endif %}
+    </footer>
+  </article>
+</div>

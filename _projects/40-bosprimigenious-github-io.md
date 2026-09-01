@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: project
 title: "bosprimigenious.github.io"
 description: "本站。al-folio 个人页。"
 importance: 40

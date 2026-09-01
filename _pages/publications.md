@@ -3,7 +3,7 @@ layout: page
 permalink: /publications/
 title: publications
 description: 论文与学术成果（在 _bibliography/papers.bib 中维护）
-nav: true
+nav: false
 nav_order: 2
 ---
 

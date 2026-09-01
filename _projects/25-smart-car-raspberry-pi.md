@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: project
 title: "smart_car_raspberry_pi"
 description: "树莓派智能车。"
 importance: 25

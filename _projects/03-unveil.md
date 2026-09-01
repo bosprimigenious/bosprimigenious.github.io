@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: project
 title: "Unveil"
 description: "揭棋对弈程序：网络真人对弈 + AI 博弈，Java 多模块。"
 importance: 3

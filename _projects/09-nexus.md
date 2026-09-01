@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: project
 title: "Nexus"
 description: "Nexus Studio：React 多智能体协作工作站。"
 importance: 9

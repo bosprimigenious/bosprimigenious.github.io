@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: project
 title: "Notification_Assistant"
 description: "给大学生的一站式信息台，按标签和热搜做个性化推荐。"
 importance: 16

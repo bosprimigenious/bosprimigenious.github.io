@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: project
 title: "BUPT-UWE-BACKEND"
 description: "北邮 UWE 选课平台后端 API。"
 importance: 13

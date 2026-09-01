@@ -9,9 +9,9 @@ last_name: Zhang
 contact_note: >
   邮件 bosprimigenious@foxmail.com 或 GitHub @bosprimigenious。
 description: >
-  Bosprimigenious — BUPT student, full-stack & frontend developer. Projects, blog, and publications.
+  张恒基 / BosPrimigenious。北邮计算机。Software engineer in Beijing.
 footer_text: >
-  © Bosprimigenious · Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> & <a href="https://github.com/alshedivat/al-folio">al-folio</a>.
+  海淀 · 西土城路 · <a href="mailto:bosprimigenious@foxmail.com">邮件</a>
 keywords: portfolio, full-stack, frontend, BUPT, bosprimigenious
 lang: zh-CN
 icon: favicon.png
@@ -183,6 +183,9 @@ collections:
     output: true
   teachings:
     output: true
+  stories:
+    output: true
+    permalink: /stories/:name/
 
 # -----------------------------------------------------------------------------
 # Jekyll settings
@@ -221,6 +224,7 @@ exclude:
   - package.json
   - package-lock.json
   - _pages/about_einstein.md
+  - assets/jupyter/
   - purgecss.config.js
   - README.md
   - readme_preview/
@@ -281,6 +285,11 @@ defaults:
       path: "assets"
     values:
       sitemap: false
+  - scope:
+      path: ""
+      type: stories
+    values:
+      layout: story
 
 sass:
   style: compressed

@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: project
 title: "FloatBalance"
 description: "跨平台桌面悬浮球，看中转站 / 模型余额和服务错误状态。"
 importance: 8

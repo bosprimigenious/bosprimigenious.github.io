@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Minecraft 服务器配置
+description: 自己搭的服。种子、规则和数据包记在这里。
 date: 2025-07-08 12:00:00
 tags: [minecraft]
 categories: notes

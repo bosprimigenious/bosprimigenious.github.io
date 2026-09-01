@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: project
 title: "SmartMole_Pro"
 description: "OpenVela 上的多模态打地鼠：触屏、实体键、超声手势和 AI 难度。"
 importance: 10

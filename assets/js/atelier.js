@@ -60,7 +60,8 @@
   const tick = () => {
     x += (tx - x) * 0.1;
     y += (ty - y) * 0.1;
-    spot.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    spot.style.setProperty("--spot-x", `${x}px`);
+    spot.style.setProperty("--spot-y", `${y}px`);
     window.requestAnimationFrame(tick);
   };
   window.requestAnimationFrame(tick);

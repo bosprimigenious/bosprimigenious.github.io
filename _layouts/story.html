@@ -1,0 +1,63 @@
+---
+layout: default
+---
+{% assign stories = site.stories | sort: "weight" %}
+{% assign prev = false %}
+{% assign nxt = false %}
+{% for s in stories %}
+  {% if s.url == page.url %}
+    {% unless forloop.first %}
+      {% assign prev = prev_s %}
+    {% endunless %}
+    {% unless forloop.last %}
+      {% assign nxt = stories[forloop.index] %}
+    {% endunless %}
+  {% endif %}
+  {% assign prev_s = s %}
+{% endfor %}
+
+<div class="fx">
+  <article class="fx-story{% if page.ratio == 'portrait' %} portrait{% endif %}">
+    <p class="fx-kicker">
+      <a href="{{ '/' | relative_url }}">张恒基</a>
+      · {{ page.kicker }}
+      {% if page.year %} · {{ page.year }}{% endif %}
+    </p>
+    <h1>{{ page.title }}</h1>
+    {% if page.description %}
+    <p class="fx-kicker" style="text-transform: none; letter-spacing: 0; font-size: 18px; color: rgba(28,25,22,.7); margin-bottom: 28px;">{{ page.description }}</p>
+    {% endif %}
+
+    <figure class="fx-hero">
+      {% if page.img %}
+      <img class="fx-fit-{{ page.fit | default: 'center' }}" src="{{ page.img | relative_url }}" alt="{{ page.title }}">
+      {% else %}
+      <div class="fx-rank">
+        <span>{{ page.level }}</span>
+        <strong>{{ page.rank }}</strong>
+      </div>
+      {% endif %}
+    </figure>
+
+    <div class="fx-body">
+      {{ content }}
+    </div>
+
+    <nav>
+      <span>
+        {% if prev %}
+        <a href="{{ prev.url | relative_url }}">← {{ prev.title }}</a>
+        {% else %}
+        <a href="{{ '/' | relative_url }}">← 首页</a>
+        {% endif %}
+      </span>
+      <span>
+        {% if nxt %}
+        <a href="{{ nxt.url | relative_url }}">{{ nxt.title }} →</a>
+        {% else %}
+        <a href="{{ '/' | relative_url }}">首页 →</a>
+        {% endif %}
+      </span>
+    </nav>
+  </article>
+</div>

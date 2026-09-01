@@ -1,26 +1,30 @@
+@import url("./inter.css");
+@import url("./folyx.css");
+
 /* Site-wide light/dark. Follows html[data-theme] from the theme toggle. */
 
 :root {
   color-scheme: light;
-  --paper: #efe3d2;
-  --card: #f4eadc;
-  --ink: #3f362c;
-  --ink-soft: #6f6356;
-  --copper: #8a5a3c;
+  --paper: #f7f7f8;
+  --card: #ffffff;
+  --ink: #1d1d1f;
+  --ink-soft: #6e6e73;
+  --copper: #c45c12;
   --rule: rgba(90, 62, 40, 0.14);
   --spot: rgba(138, 90, 60, 0.16);
   --btn: #3f362c;
   --btn-text: #efe3d2;
   --font-display: Palatino, "Palatino Linotype", "Iowan Old Style", "Songti SC", "STSong", Georgia, serif;
-  --global-bg-color: #efe3d2;
-  --global-text-color: #3f362c;
-  --global-text-color-light: #6f6356;
-  --global-theme-color: #8a5a3c;
+  --latin: Inter, "PingFang SC", "Hiragino Sans GB", sans-serif;
+  --global-bg-color: #f7f7f8;
+  --global-text-color: #1d1d1f;
+  --global-text-color-light: #6e6e73;
+  --global-theme-color: #c45c12;
   --global-hover-color: #6e4630;
   --global-hover-text-color: #efe3d2;
-  --global-footer-bg-color: #2a231c;
-  --global-footer-text-color: #c9b8a4;
-  --global-footer-link-color: #e8d5be;
+  --global-footer-bg-color: #f0f0f2;
+  --global-footer-text-color: #6e6e73;
+  --global-footer-link-color: #1d1d1f;
   --global-divider-color: rgba(90, 62, 40, 0.14);
   --global-card-bg-color: #f4eadc;
 }
@@ -202,7 +206,8 @@ body.fixed-top-nav {
 
 .vibe {
   position: relative;
-  max-width: 1080px;
+  width: min(1280px, calc(100% - clamp(1.2rem, 4vw, 3.5rem) * 2));
+  max-width: none;
   margin: 0 auto;
   padding: 1.2rem 0 4rem;
 }
@@ -212,13 +217,40 @@ body.fixed-top-nav {
   top: 0;
   left: 0;
   z-index: 0;
-  width: 220px;
-  height: 220px;
-  margin: -110px 0 0 -110px;
+  width: 240px;
+  height: 240px;
+  margin: -120px 0 0 -120px;
   pointer-events: none;
   border-radius: 50%;
   background: radial-gradient(circle, var(--spot), transparent 70%);
-  will-change: transform;
+  transform: translate3d(var(--spot-x, 42vw), var(--spot-y, 160px), 0);
+  animation: vibe-spot-breathe 7s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.vibe-breath {
+  position: fixed;
+  left: 6%;
+  bottom: 8%;
+  z-index: 0;
+  width: min(46vw, 520px);
+  height: min(46vw, 520px);
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--spot), transparent 68%);
+  animation: vibe-breathe 8.5s ease-in-out infinite;
+}
+
+.vibe-breath-late {
+  left: auto;
+  right: 4%;
+  bottom: auto;
+  top: 12%;
+  width: min(34vw, 380px);
+  height: min(34vw, 380px);
+  animation-duration: 11s;
+  animation-delay: -3s;
+  opacity: 0.7;
 }
 
 .vibe-hero,
@@ -234,6 +266,16 @@ body.fixed-top-nav {
 .atelier-year,
 .atelier-meta {
   color: var(--ink-soft);
+}
+
+.vibe-pill,
+.vibe-aka,
+.vibe-kicker,
+.vibe-btn,
+.vibe-marquee-track,
+.vibe-work em,
+.vibe-en {
+  font-family: var(--latin);
 }
 
 .vibe-pill,
@@ -362,14 +404,15 @@ body.fixed-top-nav {
 }
 
 .vibe-section {
-  margin-top: 2.8rem;
+  margin-top: 4.2rem;
 }
 
 .vibe-section h2 {
-  margin: 0 0 1rem;
-  letter-spacing: 0.18em;
-  font-size: 0.78rem;
-  text-transform: uppercase;
+  margin: 0 0 1.1rem;
+  letter-spacing: -0.04em;
+  font-size: clamp(2.4rem, 7vw, 4.4rem);
+  line-height: 0.9;
+  text-transform: none;
 }
 
 .vibe-timeline,
@@ -381,23 +424,117 @@ body.fixed-top-nav {
 
 .vibe-timeline li {
   display: grid;
-  grid-template-columns: 5.5rem 1fr;
+  grid-template-columns: 5.8rem 1fr;
   gap: 1rem;
-  padding: 0.95rem 0;
+  padding: 1.05rem 0;
   border-top: 1px solid var(--rule);
+}
+
+.vibe-timeline h3 {
+  margin: 0 0 0.28rem;
+  font-size: 1.08rem;
+}
+
+.vibe-timeline p {
+  margin: 0;
+  max-width: 40rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.vibe-focus {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.vibe-focus h3 {
+  margin: 0.35rem 0 0.4rem;
+  font-size: 1.08rem;
+}
+
+.vibe-focus p {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.55;
 }
 
 .vibe-work {
   display: grid;
-  gap: 0.7rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
 }
 
 .vibe-work a {
+  display: block;
+  padding: 0 0 1rem;
+  border-radius: 18px;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.vibe-work img {
+  display: block;
+  width: 100%;
+  height: 11rem;
+  object-fit: cover;
+}
+
+.vibe-work h3 {
   display: flex;
   justify-content: space-between;
-  padding: 1rem 1.1rem;
-  border-radius: 18px;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 0.85rem 1.1rem 0;
+  font-size: 1.2rem;
+}
+
+.vibe-work em {
+  flex: 0 0 auto;
+  font-style: normal;
+  color: var(--copper);
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+.vibe-work p,
+.vibe-notes p {
+  margin: 0.4rem 1.1rem 0;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.vibe-notes p { margin-left: 0; margin-right: 0; }
+
+.vibe-notes {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.vibe-notes a {
+  display: grid;
+  grid-template-columns: 3.4rem 3.2rem minmax(0, 1fr);
+  gap: 0.7rem 1rem;
+  padding: 0.95rem 0;
+  color: inherit;
   text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+}
+
+.vibe-notes time {
+  color: var(--copper);
+  font-size: 1.15rem;
+}
+
+.vibe-notes span {
+  color: var(--ink-soft);
+}
+
+.vibe-notes h3 {
+  margin: 0;
+  font-size: 1.05rem;
 }
 
 .vibe-work a:hover,
@@ -427,6 +564,232 @@ body.fixed-top-nav {
 
 .atelier-index-page a {
   grid-template-columns: 3.6rem 3.2rem minmax(0, 1fr);
+}
+
+.atelier-index a:hover h2,
+.atelier-index a:hover h3,
+.vibe-notes a:hover h3 {
+  color: var(--copper);
+}
+
+.atelier-index [data-reveal].is-in,
+.vibe-notes [data-reveal].is-in {
+  transition-delay: calc(var(--i, 0) * 70ms);
+}
+
+.note-hero,
+.note-article,
+.note-feature {
+  position: relative;
+  z-index: 1;
+}
+
+.note-hero {
+  padding: 1.4rem 0 0.4rem;
+}
+
+.note-hero h1,
+.note-head h1 {
+  margin: 0.35rem 0 0;
+  font-size: clamp(3.2rem, 11vw, 6.4rem);
+  line-height: 0.86;
+  letter-spacing: -0.06em;
+  animation: vibe-rise 0.95s ease both;
+}
+
+.note-deck,
+.note-head .note-deck {
+  max-width: 28rem;
+  margin: 1.1rem 0 0;
+  color: var(--ink-soft);
+  font-size: 1.12rem;
+  line-height: 1.65;
+  animation: vibe-rise 1s ease 0.08s both;
+}
+
+.note-feature {
+  display: block;
+  margin: 2rem 0 1.4rem;
+  padding: 1.5rem 1.4rem 1.4rem;
+  color: inherit;
+  text-decoration: none;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 26px;
+  animation: vibe-rise 1.05s ease 0.12s both;
+}
+
+.note-feature h2 {
+  margin: 0.4rem 0 0;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.note-feature p {
+  max-width: 34rem;
+  margin: 0.7rem 0 0;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.note-feature:hover {
+  transform: translateY(-3px);
+}
+
+.note-article {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 1.6rem 0 5rem;
+}
+
+.note-head {
+  margin-bottom: 2.4rem;
+}
+
+.note-head .vibe-kicker a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.note-meta {
+  margin: 1rem 0 0;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+}
+
+.note-body {
+  font-size: 1.08rem;
+  line-height: 1.88;
+}
+
+.note-body > * {
+  animation: vibe-rise 0.8s ease both;
+}
+
+.note-body p,
+.note-body li {
+  color: var(--ink);
+}
+
+.note-body p {
+  margin: 0 0 1.25em;
+}
+
+.note-body h1,
+.note-body h2,
+.note-body h3 {
+  margin: 2.1em 0 0.55em;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+
+.note-body h2 {
+  font-size: 1.4rem;
+}
+
+.note-body h3 {
+  font-size: 1.15rem;
+}
+
+.note-body ul,
+.note-body ol {
+  margin: 0 0 1.3em;
+  padding-left: 1.2em;
+}
+
+.note-body li + li {
+  margin-top: 0.35em;
+}
+
+.note-body hr {
+  margin: 2.4rem 0;
+  border: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.note-body pre,
+.note-body .highlight,
+.note-body code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.note-body :not(pre) > code {
+  padding: 0.1em 0.35em;
+  background: var(--card);
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+
+.note-body pre,
+.note-body .highlight {
+  margin: 0 0 1.4em;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+}
+
+.note-body pre code {
+  background: none;
+  padding: 0;
+}
+
+.note-body blockquote {
+  margin: 0 0 1.4em;
+  padding: 0.2rem 0 0.2rem 1rem;
+  color: var(--ink-soft);
+  border-left: 2px solid var(--copper);
+}
+
+.note-foot {
+  margin-top: 3.2rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--rule);
+}
+
+.note-foot > a {
+  color: var(--copper);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+}
+
+.note-more {
+  list-style: none;
+  margin: 1.4rem 0 0;
+  padding: 0;
+}
+
+.note-more a {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+}
+
+.note-more time {
+  color: var(--copper);
+}
+
+.pagination,
+.pager {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.pagination a,
+.pager a {
+  color: var(--copper);
+  text-decoration: none;
 }
 
 [data-reveal] {
@@ -460,6 +823,28 @@ body.fixed-top-nav {
   }
 }
 
+@keyframes vibe-breathe {
+  0%,
+  100% {
+    transform: scale(0.9);
+    opacity: 0.28;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 0.62;
+  }
+}
+
+@keyframes vibe-spot-breathe {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 @media (max-width: 720px) {
   .vibe-bento {
     grid-template-columns: 1fr;
@@ -473,6 +858,24 @@ body.fixed-top-nav {
   .vibe-name {
     font-size: 3.2rem;
   }
+
+  .vibe-focus,
+  .vibe-work {
+    grid-template-columns: 1fr;
+  }
+
+  .vibe-notes a {
+    grid-template-columns: 3rem 2.6rem minmax(0, 1fr);
+  }
+
+  .note-article {
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+  }
+
+  .note-feature {
+    padding: 1.15rem 1.05rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -481,13 +884,18 @@ body.fixed-top-nav {
   .vibe-lead,
   .vibe-cta,
   .vibe-marquee-track,
+  .note-hero h1,
+  .note-head h1,
+  .note-deck,
+  .note-feature,
   [data-reveal] {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
   }
 
-  .vibe-spot {
+  .vibe-spot,
+  .vibe-breath {
     display: none;
   }
 }

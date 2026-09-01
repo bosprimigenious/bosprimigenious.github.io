@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: project
 title: "Protocol-Capture-Lab"
 description: "Wireshark 抓包实验：IP / ICMP / ARP / DHCP / TCP。"
 importance: 22

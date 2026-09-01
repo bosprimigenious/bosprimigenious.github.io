@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: project
 title: "Breast_Cancer_Early_Screening_System"
 description: "乳腺癌早期筛查与风险评估 Web 应用。"
 importance: 15

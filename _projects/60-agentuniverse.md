@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: project
 title: "agentUniverse"
 description: "LLM 多智能体框架（Fork）。"
 importance: 60

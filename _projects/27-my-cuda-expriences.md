@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: project
 title: "My_Cuda_Expriences"
 description: "CUDA 入门示例。"
 importance: 27

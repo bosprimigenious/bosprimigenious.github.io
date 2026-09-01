@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: project
 title: "StudyQR"
 description: "上传二维码图片，解析并改写内容的前端工具。"
 importance: 6

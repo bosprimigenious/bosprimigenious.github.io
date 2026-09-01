@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: project
 title: "DataLink-Layer-Lab"
 description: "数据链路层滑动窗口协议，仿真卫星信道上的全双工通信。"
 importance: 21

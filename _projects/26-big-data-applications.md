@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: project
 title: "Big_data_applications"
 description: "大数据应用课程练习。"
 importance: 26
