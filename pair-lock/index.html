@@ -50,7 +50,6 @@
     <div class="row">
       <input id="pw" type="password" placeholder="直解口令" autocomplete="off">
       <button id="go-direct" type="button">直接解密</button>
-      <button id="go-pair" class="secondary" type="button">用页面里的匈牙利算法解</button>
     </div>
     <p id="status" class="muted"></p>
     <div id="out"></div>
@@ -97,63 +96,6 @@ function showImage(bytes) {
   outEl.appendChild(img);
 }
 
-function hungarian(a) {
-  const n = a.length;
-  const u = Array(n + 1).fill(0);
-  const v = Array(n + 1).fill(0);
-  const p = Array(n + 1).fill(0);
-  const way = Array(n + 1).fill(0);
-  for (let i = 1; i <= n; i++) {
-    p[0] = i;
-    let j0 = 0;
-    const minv = Array(n + 1).fill(1e18);
-    const used = Array(n + 1).fill(false);
-    while (true) {
-      used[j0] = true;
-      const i0 = p[j0];
-      let delta = 1e18;
-      let j1 = 0;
-      for (let j = 1; j <= n; j++) {
-        if (!used[j]) {
-          const cur = a[i0 - 1][j - 1] - u[i0] - v[j];
-          if (cur < minv[j]) {
-            minv[j] = cur;
-            way[j] = j0;
-          }
-          if (minv[j] < delta) {
-            delta = minv[j];
-            j1 = j;
-          }
-        }
-      }
-      for (let j = 0; j <= n; j++) {
-        if (used[j]) {
-          u[p[j]] += delta;
-          v[j] -= delta;
-        } else {
-          minv[j] -= delta;
-        }
-      }
-      j0 = j1;
-      if (p[j0] === 0) break;
-    }
-    while (true) {
-      const j1 = way[j0];
-      p[j0] = p[j1];
-      j0 = j1;
-      if (j0 === 0) break;
-    }
-  }
-  const match = Array(n).fill(0);
-  for (let j = 1; j <= n; j++) if (p[j]) match[p[j] - 1] = j - 1;
-  return match;
-}
-
-async function sha256(bytes) {
-  const dig = await crypto.subtle.digest("SHA-256", bytes);
-  return new Uint8Array(dig);
-}
-
 let puzzlePromise = fetch("./puzzle.json").then((r) => {
   if (!r.ok) throw new Error("puzzle.json " + r.status);
   return r.json();
@@ -187,25 +129,6 @@ function render(puz) {
 puzzlePromise.then(render).catch((e) => {
   statusEl.textContent = String(e);
   statusEl.className = "err";
-});
-
-document.querySelector("#go-pair").addEventListener("click", async () => {
-  statusEl.className = "muted";
-  statusEl.textContent = "正在求最小代价完美匹配…";
-  outEl.innerHTML = "";
-  try {
-    const puz = await puzzlePromise;
-    const match = hungarian(puz.cost);
-    const parts = match.map((col, i) => puz.left[i] + puz.right_display[col]);
-    const material = "pair|" + parts.join("|");
-    const key = await sha256(new TextEncoder().encode(material));
-    const pt = await aesGcmDecrypt(key, b64ToBytes(puz.pair_blob_b64), "pair-lock-v1");
-    statusEl.textContent = "匹配解开。总代价已验证，图在下面。";
-    showImage(pt);
-  } catch (e) {
-    statusEl.className = "err";
-    statusEl.textContent = "配对解密失败：" + e.message;
-  }
 });
 
 document.querySelector("#go-direct").addEventListener("click", async () => {
