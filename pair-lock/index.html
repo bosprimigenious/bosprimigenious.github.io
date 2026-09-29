@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>配对锁</title>
+<style>
+  :root { color-scheme: light; --ink:#1c1917; --muted:#57534e; --line:#e7e5e4; --bg:#fafaf9; --card:#fff; --accent:#0f766e; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:16px/1.65 "Iowan Old Style", Palatino, "Songti SC", "Noto Serif SC", serif; color:var(--ink); background:var(--bg); }
+  main { max-width:760px; margin:0 auto; padding:48px 20px 80px; }
+  h1 { font-weight:500; font-size:2rem; letter-spacing:-0.03em; margin:0 0 8px; }
+  h2 { font-weight:500; font-size:1.15rem; margin:2.2rem 0 0.6rem; }
+  p, li { color:var(--ink); }
+  .muted { color:var(--muted); }
+  code, .mono { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace; font-size:0.86em; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px 18px; margin:16px 0; }
+  table { border-collapse:collapse; width:100%; font-size:13px; font-family:ui-monospace, Menlo, monospace; }
+  th, td { border-bottom:1px solid var(--line); padding:4px 6px; text-align:right; }
+  th:first-child, td:first-child { text-align:left; }
+  .scroll { overflow:auto; max-height:420px; border:1px solid var(--line); border-radius:12px; background:#fff; }
+  button, input { font:inherit; }
+  button { background:var(--accent); color:#fff; border:0; border-radius:8px; padding:8px 14px; cursor:pointer; }
+  button.secondary { background:#fff; color:var(--ink); border:1px solid var(--line); }
+  input { border:1px solid var(--line); border-radius:8px; padding:8px 10px; width:min(100%, 320px); }
+  #out img { max-width:min(100%, 420px); display:block; margin-top:16px; border-radius:12px; }
+  .err { color:#b91c1c; }
+  .row { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  footer { margin-top:48px; color:var(--muted); font-size:14px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>配对锁</h1>
+  <p class="muted">一张图被锁了两次。两条路打开的是同一张图。</p>
+
+  <h2>题</h2>
+  <p>给定 16 个左标记、16 个右标记，以及 16×16 的代价矩阵。左标记的顺序固定。右标记的展示顺序是打乱的，矩阵的列对应该展示顺序。</p>
+  <p>求唯一的最小代价完美匹配：每个左标记恰好连一个右标记，每个右标记恰好被连一次，总代价最小。把匹配按左标记的既定顺序写成</p>
+  <p class="mono">left₀∥right₀|left₁∥right₁|…|left₁₅∥right₁₅</p>
+  <p>其中 ∥ 表示两个标记直接拼接，对与对之间用一个竖线 <code>|</code> 隔开。对该 UTF-8 字节串做</p>
+  <p class="mono">SHA-256( "pair|" ∥ 上面的字符串 )</p>
+  <p>得到 32 字节密钥。用 AES-256-GCM 解密 <code>puzzle.json</code> 里的 <code>pair_blob_b64</code>。密文布局是 12 字节 nonce，后面是 ciphertext‖tag。附加数据是 UTF-8 字符串 <code>pair-lock-v1</code>。</p>
+  <p>这条匹配是唯一最优。把任何一条最优边的代价抬高，最优值都会变大。所以配对结果只有一组。</p>
+
+  <h2>直解</h2>
+  <p>知道口令的人不必做匹配。口令不在本页。用 PBKDF2-HMAC-SHA256 派生密钥：salt 为 UTF-8 <code>pair-lock-direct-v1</code>，迭代 100000 次，dkLen=32。再用 AES-256-GCM 解密 <code>direct_blob_b64</code>，附加数据是 <code>pair-lock-direct-v1</code>，布局同样是 12 字节 nonce 接 ciphertext‖tag。</p>
+
+  <div class="card">
+    <div class="row">
+      <input id="pw" type="password" placeholder="直解口令" autocomplete="off">
+      <button id="go-direct" type="button">直接解密</button>
+      <button id="go-pair" class="secondary" type="button">用页面里的匈牙利算法解</button>
+    </div>
+    <p id="status" class="muted"></p>
+    <div id="out"></div>
+  </div>
+
+  <h2>数据</h2>
+  <p>完整字段、两个密文和矩阵都在 <a href="./puzzle.json">puzzle.json</a>。下面是同一份矩阵，方便阅读。</p>
+  <div class="scroll"><table id="grid"></table></div>
+
+  <footer>
+    <p>私有仓库只给作者。公开页只有题面和密文。</p>
+  </footer>
+</main>
+<script>
+const statusEl = document.querySelector("#status");
+const outEl = document.querySelector("#out");
+
+function b64ToBytes(s) {
+  const bin = atob(s);
+  const out = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+  return out;
+}
+
+async function aesGcmDecrypt(keyBytes, blob, aad) {
+  const nonce = blob.slice(0, 12);
+  const data = blob.slice(12);
+  const key = await crypto.subtle.importKey("raw", keyBytes, "AES-GCM", false, ["decrypt"]);
+  const pt = await crypto.subtle.decrypt(
+    { name: "AES-GCM", iv: nonce, additionalData: new TextEncoder().encode(aad) },
+    key,
+    data
+  );
+  return new Uint8Array(pt);
+}
+
+function showImage(bytes) {
+  const blob = new Blob([bytes], { type: "image/png" });
+  const url = URL.createObjectURL(blob);
+  outEl.innerHTML = "";
+  const img = document.createElement("img");
+  img.alt = "解密后的微信卡片";
+  img.src = url;
+  outEl.appendChild(img);
+}
+
+function hungarian(a) {
+  const n = a.length;
+  const u = Array(n + 1).fill(0);
+  const v = Array(n + 1).fill(0);
+  const p = Array(n + 1).fill(0);
+  const way = Array(n + 1).fill(0);
+  for (let i = 1; i <= n; i++) {
+    p[0] = i;
+    let j0 = 0;
+    const minv = Array(n + 1).fill(1e18);
+    const used = Array(n + 1).fill(false);
+    while (true) {
+      used[j0] = true;
+      const i0 = p[j0];
+      let delta = 1e18;
+      let j1 = 0;
+      for (let j = 1; j <= n; j++) {
+        if (!used[j]) {
+          const cur = a[i0 - 1][j - 1] - u[i0] - v[j];
+          if (cur < minv[j]) {
+            minv[j] = cur;
+            way[j] = j0;
+          }
+          if (minv[j] < delta) {
+            delta = minv[j];
+            j1 = j;
+          }
+        }
+      }
+      for (let j = 0; j <= n; j++) {
+        if (used[j]) {
+          u[p[j]] += delta;
+          v[j] -= delta;
+        } else {
+          minv[j] -= delta;
+        }
+      }
+      j0 = j1;
+      if (p[j0] === 0) break;
+    }
+    while (true) {
+      const j1 = way[j0];
+      p[j0] = p[j1];
+      j0 = j1;
+      if (j0 === 0) break;
+    }
+  }
+  const match = Array(n).fill(0);
+  for (let j = 1; j <= n; j++) if (p[j]) match[p[j] - 1] = j - 1;
+  return match;
+}
+
+async function sha256(bytes) {
+  const dig = await crypto.subtle.digest("SHA-256", bytes);
+  return new Uint8Array(dig);
+}
+
+let puzzlePromise = fetch("./puzzle.json").then((r) => {
+  if (!r.ok) throw new Error("puzzle.json " + r.status);
+  return r.json();
+});
+
+function render(puz) {
+  const table = document.querySelector("#grid");
+  const head = document.createElement("tr");
+  head.appendChild(document.createElement("th"));
+  for (const r of puz.right_display) {
+    const th = document.createElement("th");
+    th.textContent = r.slice(0, 6);
+    th.title = r;
+    head.appendChild(th);
+  }
+  table.appendChild(head);
+  puz.left.forEach((name, i) => {
+    const tr = document.createElement("tr");
+    const th = document.createElement("th");
+    th.textContent = name;
+    tr.appendChild(th);
+    puz.cost[i].forEach((c) => {
+      const td = document.createElement("td");
+      td.textContent = c;
+      tr.appendChild(td);
+    });
+    table.appendChild(tr);
+  });
+}
+
+puzzlePromise.then(render).catch((e) => {
+  statusEl.textContent = String(e);
+  statusEl.className = "err";
+});
+
+document.querySelector("#go-pair").addEventListener("click", async () => {
+  statusEl.className = "muted";
+  statusEl.textContent = "正在求最小代价完美匹配…";
+  outEl.innerHTML = "";
+  try {
+    const puz = await puzzlePromise;
+    const match = hungarian(puz.cost);
+    const parts = match.map((col, i) => puz.left[i] + puz.right_display[col]);
+    const material = "pair|" + parts.join("|");
+    const key = await sha256(new TextEncoder().encode(material));
+    const pt = await aesGcmDecrypt(key, b64ToBytes(puz.pair_blob_b64), "pair-lock-v1");
+    statusEl.textContent = "匹配解开。总代价已验证，图在下面。";
+    showImage(pt);
+  } catch (e) {
+    statusEl.className = "err";
+    statusEl.textContent = "配对解密失败：" + e.message;
+  }
+});
+
+document.querySelector("#go-direct").addEventListener("click", async () => {
+  statusEl.className = "muted";
+  statusEl.textContent = "正在派生密钥…";
+  outEl.innerHTML = "";
+  try {
+    const puz = await puzzlePromise;
+    const pw = document.querySelector("#pw").value;
+    if (!pw) throw new Error("口令为空");
+    const base = await crypto.subtle.importKey("raw", new TextEncoder().encode(pw), "PBKDF2", false, ["deriveBits"]);
+    const bits = await crypto.subtle.deriveBits({
+      name: "PBKDF2",
+      hash: "SHA-256",
+      salt: new TextEncoder().encode("pair-lock-direct-v1"),
+      iterations: 100000
+    }, base, 256);
+    const pt = await aesGcmDecrypt(new Uint8Array(bits), b64ToBytes(puz.direct_blob_b64), "pair-lock-direct-v1");
+    statusEl.textContent = "直解开。图在下面。";
+    showImage(pt);
+  } catch (e) {
+    statusEl.className = "err";
+    statusEl.textContent = "直解失败：" + (e.message || e);
+  }
+});
+</script>
+</body>
+</html>
