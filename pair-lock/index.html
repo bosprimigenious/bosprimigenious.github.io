@@ -8,12 +8,16 @@
   :root { color-scheme: light; --ink:#1c1917; --muted:#57534e; --line:#e7e5e4; --bg:#fafaf9; --card:#fff; --accent:#0f766e; }
   * { box-sizing: border-box; }
   body { margin:0; font:16px/1.65 "Iowan Old Style", Palatino, "Songti SC", "Noto Serif SC", serif; color:var(--ink); background:var(--bg); }
-  main { max-width:760px; margin:0 auto; padding:48px 20px 80px; }
+  main { max-width:720px; margin:0 auto; padding:48px 20px 80px; }
   h1 { font-weight:500; font-size:2rem; letter-spacing:-0.03em; margin:0 0 8px; }
   h2 { font-weight:500; font-size:1.15rem; margin:2.2rem 0 0.6rem; }
-  p, li { color:var(--ink); }
+  p, li { color:var(--ink); text-wrap: pretty; line-break: strict; }
   .muted { color:var(--muted); }
   code, .mono { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace; font-size:0.86em; }
+  code { white-space: nowrap; }
+  .formula { white-space: nowrap; overflow-x: auto; padding: 2px 0 8px; }
+  ul { margin: 0.4rem 0 1rem; padding-left: 1.2em; }
+  li { margin: 0.15em 0; }
   .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px 18px; margin:16px 0; }
   table { border-collapse:collapse; width:100%; font-size:13px; font-family:ui-monospace, Menlo, monospace; }
   th, td { border-bottom:1px solid var(--line); padding:4px 6px; text-align:right; }
@@ -35,16 +39,33 @@
   <p class="muted">一张图被锁了两次。两条路打开的是同一张图。</p>
 
   <h2>题</h2>
-  <p>给定 16 个左标记、16 个右标记，以及 16×16 的代价矩阵。左标记的顺序固定。右标记的展示顺序是打乱的，矩阵的列对应该展示顺序。</p>
-  <p>求唯一的最小代价完美匹配：每个左标记恰好连一个右标记，每个右标记恰好被连一次，总代价最小。把匹配按左标记的既定顺序写成</p>
-  <p class="mono">left₀∥right₀|left₁∥right₁|…|left₁₅∥right₁₅</p>
-  <p>其中 ∥ 表示两个标记直接拼接，对与对之间用一个竖线 <code>|</code> 隔开。对该 UTF-8 字节串做</p>
-  <p class="mono">SHA-256( "pair|" ∥ 上面的字符串 )</p>
-  <p>得到 32 字节密钥。用 AES-256-GCM 解密 <code>puzzle.json</code> 里的 <code>pair_blob_b64</code>。密文布局是 12 字节 nonce，后面是 ciphertext‖tag。附加数据是 UTF-8 字符串 <code>pair-lock-v1</code>。</p>
+  <p>给定 16 个左标记、16 个右标记，以及 16×16 的代价矩阵。</p>
+  <p>左标记的顺序固定。右标记的展示顺序是打乱的，矩阵的列对应该展示顺序。</p>
+  <p>求唯一的最小代价完美匹配：每个左标记恰好连一个右标记，每个右标记恰好被连一次，总代价最小。</p>
+  <p>把匹配按左标记的既定顺序写成下面这一行。双竖线表示两个标记直接拼接，单竖线隔开每一对。</p>
+  <p class="mono formula">left₀||right₀|left₁||right₁|…|left₁₅||right₁₅</p>
+  <p>对该 UTF-8 字节串做</p>
+  <p class="mono formula">SHA-256("pair|" || 上面的字符串)</p>
+  <p>得到 32 字节密钥。用 AES-256-GCM 解密 <code>puzzle.json</code> 里的 <code>pair_blob_b64</code>。</p>
+  <ul>
+    <li>密文布局：12 字节 <code>nonce</code>，后面是 <code>ciphertext</code> 和 <code>tag</code></li>
+    <li>附加数据：<code>pair-lock-v1</code></li>
+  </ul>
   <p>这条匹配是唯一最优。把任何一条最优边的代价抬高，最优值都会变大。所以配对结果只有一组。</p>
 
   <h2>直解</h2>
-  <p>知道口令的人不必做匹配。口令不在本页。用 PBKDF2-HMAC-SHA256 派生密钥：salt 为 UTF-8 <code>pair-lock-direct-v1</code>，迭代 100000 次，dkLen=32。再用 AES-256-GCM 解密 <code>direct_blob_b64</code>，附加数据是 <code>pair-lock-direct-v1</code>，布局同样是 12 字节 nonce 接 ciphertext‖tag。</p>
+  <p>知道口令的人不必做匹配。口令不在本页。</p>
+  <p>用 <code>PBKDF2-HMAC-SHA256</code> 派生密钥，参数如下。</p>
+  <ul>
+    <li>salt：<code>pair-lock-direct-v1</code></li>
+    <li>迭代：100000 次</li>
+    <li>长度：32 字节</li>
+  </ul>
+  <p>再用 AES-256-GCM 解密 <code>direct_blob_b64</code>。</p>
+  <ul>
+    <li>附加数据：<code>pair-lock-direct-v1</code></li>
+    <li>密文布局：12 字节 <code>nonce</code>，后面是 <code>ciphertext</code> 和 <code>tag</code></li>
+  </ul>
 
   <div class="card">
     <div class="row">
